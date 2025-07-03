@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Travel Bucket List</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(90deg, #ff6a00, #ff9900);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            margin: 20px auto;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-bar input {
+            width: 80%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #ff6a00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: #e65800;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #444;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Card Styles */
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-content h3 {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .card-content p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .card-content button {
+            padding: 10px 15px;
+            background: #ff6a00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .card-content button:hover {
+            background: #d45b00;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, #ff6a00, #ff9900);
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Dark Mode Button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Visited Counter */
+        #visitedCounter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff6a00;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .category-filter select {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>India Travel Bucket List</h1>
+    </header>
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search for a destination..." oninput="filterDestinations()">
+        <button onclick="filterDestinations()">Search</button>
+    </div>
+
+    <!-- Category Filter Dropdown -->
+    <div class="category-filter">
+        <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="hill station">Hill Stations</option>
+            <option value="beach">Beaches</option>
+            <option value="historical">Historical</option>
+        </select>
+    </div>
+
+    <main>
+        <h2>Explore the Wonders of India</h2>
+        <div class="destination-grid" id="destinationGrid">
+            <!-- Cards for Destinations with category data -->
+            <div class="card" data-category="hill station">
+                <img src="images/Jaipur.jpg" alt="Jaipur">
+                <div class="card-content">
+                    <h3>Jaipur, Rajasthan</h3>
+                    <p>The Pink City known for its royal palaces and forts.</p>
+                    <button>Mark as Visited</button>
+                </div>
+            </div>
+            <div class="card" data-category="beach">
+                <img src="images/goa.jpg" alt="Goa">
+                <div class="card-content">
+                    <h3>Goa</h3>
+                    <p>Famous for its beaches, nightlife, and Portuguese heritage.</p>
+                    <button>Mark as Visited</button>
+                </div>
+            </div>
+            <div class="card" data-category="historical">
+                <img src="images/agra.jpg" alt="Agra">
+                <div class="card-content">
+                    <h3>Agra, Uttar Pradesh</h3>
+                    <p>Home to the iconic Taj Mahal, one of the Seven Wonders.</p>
+                    <button>Mark as Visited</button>
+                </div>
+            </div>
+            <div class="card" data-category="hill station">
+                <img src="images/kerala.jpg" alt="Kerala">
+                <div class="card-content">
+                    <h3>Kerala</h3>
+                    <p>Known for lush greenery, backwaters, and houseboats.</p>
+                    <button>Mark as Visited</button>
+                </div>
+            </div>
+            <div class="card" data-category="hill station">
+                <img src="images/manali.jpg" alt="Manali">
+                <div class="card-content">
+                    <h3>Manali, Himachal Pradesh</h3>
+                    <p>Scenic hill station with snowy peaks and adventure sports.</p>
+                    <button>Mark as Visited</button>
+                </div>
+            </div>
+            <div class="card" data-category="historical">
+                <img src="images/varanasi.jpg" alt="Varanasi">
+                <div class="card-content">
+                    <h3>Varanasi, Uttar Pradesh</h3>
+                    <p>Spiritual capital of India, famous for the Ganga Aarti.</p>
+                    <button>Mark as Visited</button>
+                </div>
+            </div>
+            <div class="card" data-category="historical">
+                <img src="images/mumbai.jpg" alt="Mumbai">
+                <div class="card-content">
+                    <h3>Mumbai, Maharashtra</h3>
+                    <p>Home to Bollywood, the Gateway of India, and vibrant life.</p>
+                    <button>Mark as Visited</button>
+                </div>
+            </div>
+            <div class="card" data-category="hill station">
+                <img src="images/darjeeling.jpg" alt="Darjeeling">
+                <div class="card-content">
+                    <h3>Darjeeling, West Bengal</h3>
+                    <p>Known for its tea gardens and breathtaking mountain views.</p>
+                    <button>Mark as Visited</button>
+                </div>
+            </div>
+            <div class="card" data-category="hill station">
+                <img src="images/nainital.jpg" alt="Nainital">
+                <div class="card-content">
+                    <h3>Nainital, Uttarakhand</h3>
+                    <p>A picturesque town famous for its lake and scenic views.</p>
+                    <button>Mark as Visited</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Random Picker Button -->
+    <div style="text-align: center; margin: 20px 0;">
+        <button id="randomPicker" style="padding: 10px 20px; background: #17a2b8; color: white; border: none; border-radius: 5px; cursor: pointer;">Feeling Adventurous?</button>
+    </div>
+
+    <!-- Weather Integration Button -->
+    <div style="text-align: center; margin: 20px;">
+        <button id="weatherBtn" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Show Weather</button>
+    </div>
+
+    <footer>
+        <p>© 2025 India Travel Bucket List. All rights reserved.</p>
+    </footer>
+
+    <div id="visitedCounter">Visited: 0</div>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
+
+    <script src="travel bucket list.js"></script>
+</body>
+</html>
+
+
+            
+           
